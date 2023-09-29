@@ -17,6 +17,16 @@ void ArvoreBinaria::insere(char valor) {
     insereRecursivo(raiz,valor);
 }
 
+void ArvoreBinaria::caminha(int tipo) {
+    if(tipo == 0) {
+        preOrdem(raiz);
+    } else if(tipo == 1) {
+        inOrdem(raiz);
+    } else if(tipo == 2) {
+        posOrdem(raiz);
+    }
+}
+
 void ArvoreBinaria::insereRecursivo(TipoNo* &p, char valor) {
     if(p==NULL){
         p = new TipoNo(valor);
