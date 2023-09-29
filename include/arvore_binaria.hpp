@@ -8,11 +8,12 @@ class ArvoreBinaria {
     public:
         ArvoreBinaria();
         ~ArvoreBinaria();
-        void insere(std::string valor);
+        void insere(char valor);
         void caminha(int tipo);
         void limpa();
+        void defineRaiz(TipoNo* p);
     protected:
-        void insereRecursivo(TipoNo* &p, std::string valor);
+        void insereRecursivo(TipoNo* &p, char valor);
         void apagaRecursivo(TipoNo* p);
         void porNivel();
         void preOrdem(TipoNo* p);

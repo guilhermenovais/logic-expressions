@@ -1,7 +1,8 @@
 #include "../include/no.hpp"
 
-TipoNo::TipoNo(std::string valor) {
+TipoNo::TipoNo(char valor) {
     this->valor = valor;
-    esq = NULL;
-    dir = NULL;
+    esq = nullptr;
+    dir = nullptr;
+    pai = nullptr;
 }

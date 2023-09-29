@@ -9,11 +9,15 @@ ArvoreBinaria::~ArvoreBinaria() {
     limpa();
 }
 
-void ArvoreBinaria::insere(std::string valor) {
+void ArvoreBinaria::defineRaiz(TipoNo* p) {
+    raiz = p;
+}
+
+void ArvoreBinaria::insere(char valor) {
     insereRecursivo(raiz,valor);
 }
 
-void ArvoreBinaria::insereRecursivo(TipoNo* &p, std::string valor) {
+void ArvoreBinaria::insereRecursivo(TipoNo* &p, char valor) {
     if(p==NULL){
         p = new TipoNo(valor);
     } else{
