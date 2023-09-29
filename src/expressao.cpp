@@ -33,10 +33,13 @@ void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao,
     TipoNo* atual = new TipoNo(expressao[indice]);
 
     if(*raiz == nullptr) *raiz = atual;
-    else if(atual->valor == ')') {
+    else if(atual->valor == '(') {
+        atual->pai = *anterior;
+        (*anterior)->dir = atual;
+    } else if(atual->valor == ')') {
         TipoNo* candidato_a_filho = *anterior;
         while(1) {
-            if(candidato_a_filho->valor == ')') {
+            if(candidato_a_filho->valor == '(') {
                 atual->pai = candidato_a_filho->pai;
                 candidato_a_filho->pai->dir = atual;
                 atual->esq = candidato_a_filho;
@@ -82,11 +85,11 @@ void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao,
 }
 
 int Expressao::getPrecedencia(char valor) {
-    if(valor == '|') return 0;
-    else if(valor == '&') return 1;
-    else if(std::isdigit(valor)) return 2;
-    else if(valor == ')') return 3;
-    else if(valor == '(') return 4;
+    if(valor == '(') return 0;
+    else if(valor == '|') return 1;
+    else if(valor == '&') return 2;
+    else if(std::isdigit(valor)) return 3;
+    else if(valor == ')') return 4;
     else return 5;
 }
 
