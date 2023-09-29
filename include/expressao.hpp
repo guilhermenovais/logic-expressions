@@ -4,16 +4,19 @@
 #include "arvore_binaria.hpp"
 #include <string>
 
+#define UNIVERSAL 2
+#define EXISTENCIAL 3
+
 class Expressao {
     private:
         ArvoreBinaria arvore_expressao;
-        bool valores[100];
+        int valores[100];
         std::string tipo;
         // Posfixa posfixa;
         // Infixa infixa;
         // int tipo_exp;
     public:
-        Expressao(std::string expressao, std::string valores, std::string tipo);
+        Expressao(std::string str_expressao, std::string str_valores, std::string str_tipo);
         void constroiArvore(std::string expressao);
         void leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao, int indice);
         int getPrecedencia(char valor);
