@@ -3,10 +3,16 @@
 #include <iostream>
 #include <stdexcept>
 
-Expressao::Expressao(std::string expressao, std::string valores, std::string str_tipo) {
-    constroiArvore(expressao);
-    if(tipo == "-a") tipo = "avaliador" ;
+Expressao::Expressao(std::string str_expressao, std::string str_valores, std::string str_tipo) {
+    constroiArvore(str_expressao);
+    if(str_tipo == "-a") tipo = "avaliador" ;
     else tipo =  "satisfabilidade";
+    for(int i = 0; i < str_valores.length(); i++) {
+        if(str_expressao[i] == '0') valores[i] = 0;
+        else if(str_expressao[i] == '1') valores[i] = 1;
+        else if(str_expressao[i] == 'e') valores[i] = EXISTENCIAL;
+        else if(str_expressao[i] == 'a') valores[i] = UNIVERSAL;
+    }
 }
 
 void Expressao::constroiArvore(std::string expressao) {
