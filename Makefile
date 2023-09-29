@@ -16,7 +16,7 @@ INC = include
 BIN = bin
 OBJS = $(OBJ)/arvore_binaria.o $(OBJ)/no.o $(OBJ)/pilha.o $(OBJ)/expressao.o $(OBJ)/main.o
 HDRS = $(INC)/arvore_binaria.hpp $(INC)/no.hpp $(INC)/pilha.hpp $(INC)/expressao.hpp
-CFLAGS = -c -I $(INC)
+CFLAGS = -c -g -I $(INC)
 
 EXE = $(BIN)/expressoes
 
@@ -44,8 +44,8 @@ clean:
 	rm -f $(EXE) $(OBJS) gmon.out
 
 run: all
-	./bin/expressoes -a "0 | 1" 01
+	./bin/expressoes -a "0 & 1 | 2" 012
 
 test: all
-	clear
-	./bin/expressoes -a "0 | 1" 01
+	valgrind --leak-check=full --show-leak-kinds=all ./bin/expressoes
+	./bin/expressoes -a "0 & 1 | 2" 012
