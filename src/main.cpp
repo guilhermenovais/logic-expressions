@@ -4,58 +4,17 @@
 #include <istream>
 #include <sstream>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 string trim(std::string& s);
 
-int main() {
-    string line, comando, tipo_exp, exp;
-    Expressao expressao;
-    while (getline(cin, line)) {
-        stringstream ss(line);
-        ss >> comando;
-        if(comando == "LER") {
-            ss >> tipo_exp;
-            getline(ss >> ws, exp);
-            exp = trim(exp);
-            if(tipo_exp == "POSFIXA") {
-                if(expressao.lePosfixa(exp)) {
-                    cout << "EXPRESSAO OK: " << expressao.getExp() << "\n";
-                } else {
-                    cout << "ERRO: EXP NAO VALIDA\n";
-                }
-            } else if(tipo_exp == "INFIXA") {
-                if(expressao.leInfixa(exp)) {
-                    cout << "EXPRESSAO OK: " << expressao.getExp() << "\n";
-                } else {
-                    cout << "ERRO: EXP NAO VALIDA\n";
-                }
-            }
-        } else if(comando == "INFIXA") {
-            if(expressao.posParaInf()) {
-                cout << "INFIXA: " << expressao.getExp() << "\n";
-            } else {
-                cout << "ERRO: EXP NAO EXISTE" << "\n";
-            }
-        } else if(comando == "POSFIXA") {
-            if(expressao.infParaPos()) {
-                cout << "POSFIXA: " << expressao.getExp() << "\n";
-            } else {
-                cout << "ERRO: EXP NAO EXISTE" << "\n";
-            }
-        } else if(comando == "RESOLVE") {
-            try {
-                double resultado = expressao.resolve();
-                cout.precision(6);
-                cout << "VAL: " << fixed << resultado << '\n';
-            } catch (const std::exception& e) {
-                cout << e.what() << "\n";
-            }
-        }
-    }
-
-    return 0;
+int main(int argc, char *argv[]) {
+    std::string tipo = argv[1];
+    std::string str_expressao = argv[2];
+    std::string valores = argv[3];
+    Expressao expressao = Expressao(str_expressao, valores, tipo);
 }
 
 string trim(std::string& str) {
