@@ -14,6 +14,9 @@ void Expressao::constroiArvore(std::string expressao) {
     leValor(&raiz, &raiz, expressao, 0);
     arvore_expressao = ArvoreBinaria();
     arvore_expressao.defineRaiz(raiz);
+    std::cout << "\n\n";
+    arvore_expressao.caminha(1);
+    std::cout << "\n\n";
 }
 
 void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao, int indice) {
@@ -30,7 +33,19 @@ void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao,
     TipoNo* atual = new TipoNo(expressao[indice]);
 
     if(*raiz == nullptr) *raiz = atual;
-    else {
+    else if(atual->valor == ')') {
+        TipoNo* candidato_a_filho = *anterior;
+        while(1) {
+            if(candidato_a_filho->valor == ')') {
+                atual->pai = candidato_a_filho->pai;
+                candidato_a_filho->pai->dir = atual;
+                atual->esq = candidato_a_filho;
+                candidato_a_filho->pai = atual;
+                break;
+            }
+            candidato_a_filho = candidato_a_filho->pai;
+        }
+    } else {
         TipoNo* candidato_a_pai = *anterior;
         while(1) {
             // Caso a precedência do pai seja menor
@@ -67,21 +82,12 @@ void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao,
 }
 
 int Expressao::getPrecedencia(char valor) {
-    switch(valor) {
-        case '(':
-            return 0;
-        case '|':
-            return 1;
-        case '&':
-            return 2;
-        case '0':
-        case '1':
-            return 3;
-        case ')':
-            return 4;
-        default:
-            return 4;
-    }
+    if(valor == '|') return 0;
+    else if(valor == '&') return 1;
+    else if(std::isdigit(valor)) return 2;
+    else if(valor == ')') return 3;
+    else if(valor == '(') return 4;
+    else return 5;
 }
 
 // bool Expressao::lePosfixa(std::string expressao) {
