@@ -48,4 +48,4 @@ run: all
 
 test: all
 	valgrind --leak-check=full --show-leak-kinds=all ./bin/expressoes -a "0 & ( 1 | 2 )" 011
-	./bin/expressoes -a "0 & 1 | 2" 010
+	gdb -args ./bin/expressoes -a "0 & ( 1 | 2 )" 011

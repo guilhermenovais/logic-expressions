@@ -36,8 +36,12 @@ void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao,
     std::string elemento = "";
     while(1) {
         elemento.push_back(expressao[indice]);
-        if(indice + 1 < expressao.length() && expressao[indice + 1] != ' ') {
-            indice++;
+        if(indice + 1 < expressao.length()) {
+            if(expressao[indice + 1] != ' ') {
+                indice++;
+            } else {
+                break;
+            }
         } else {
             break;
         }
