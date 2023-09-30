@@ -61,7 +61,12 @@ void ArvoreBinaria::posOrdem(TipoNo *p, int* valores){
         else if(p->valor == "(") p->resultado = p->dir->resultado;
         else if(p->valor == ")") p->resultado = p->esq->resultado;
         else {
-            p->resultado = true;
+            int indice_valor = std::stoi(p->valor);
+            if(valores[indice_valor] == 0) {
+                p->resultado = false;
+            } else {
+                p->resultado = true;
+            }
         }
     }
 }
