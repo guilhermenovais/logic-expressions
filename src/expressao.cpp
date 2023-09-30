@@ -57,11 +57,18 @@ void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao,
         TipoNo* candidato_a_filho = *anterior;
         while(1) {
             if(candidato_a_filho->valor == "(") {
+                if(candidato_a_filho->pai == nullptr) {
+                    *raiz = atual;
+                    candidato_a_filho->pai = atual;
+                    atual->esq = candidato_a_filho;
+                    break;
+                } else {
                 atual->pai = candidato_a_filho->pai;
                 candidato_a_filho->pai->dir = atual;
                 atual->esq = candidato_a_filho;
                 candidato_a_filho->pai = atual;
                 break;
+            }
             }
             candidato_a_filho = candidato_a_filho->pai;
         }
