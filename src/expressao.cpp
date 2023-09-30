@@ -5,13 +5,13 @@
 
 Expressao::Expressao(std::string str_expressao, std::string str_valores, std::string str_tipo) {
     constroiArvore(str_expressao);
-    if(str_tipo == "-a") tipo = "avaliador" ;
+    if(str_tipo == "-a") tipo = "avaliador";
     else tipo =  "satisfabilidade";
     for(int i = 0; i < str_valores.length(); i++) {
-        if(str_expressao[i] == '0') valores[i] = 0;
-        else if(str_expressao[i] == '1') valores[i] = 1;
-        else if(str_expressao[i] == 'e') valores[i] = EXISTENCIAL;
-        else if(str_expressao[i] == 'a') valores[i] = UNIVERSAL;
+        if(str_valores[i] == '0') valores[i] = 0;
+        else if(str_valores[i] == '1') valores[i] = 1;
+        else if(str_valores[i] == 'e') valores[i] = EXISTENCIAL;
+        else if(str_valores[i] == 'a') valores[i] = UNIVERSAL;
     }
 }
 
