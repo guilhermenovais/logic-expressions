@@ -44,8 +44,8 @@ clean:
 	rm -f $(EXE) $(OBJS) gmon.out
 
 run: all
-	./bin/expressoes -a "0 & 1 | 2" 012
+	./bin/expressoes -a "0 & ( 1 | 2 )" 111
 
 test: all
-	valgrind --leak-check=full --show-leak-kinds=all ./bin/expressoes
-	./bin/expressoes -a "0 & 1 | 2" 012
+	valgrind --leak-check=full --show-leak-kinds=all ./bin/expressoes -a "0 & ( 1 | 2 )" 011
+	./bin/expressoes -a "0 & 1 | 2" 010

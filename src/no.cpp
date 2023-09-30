@@ -1,6 +1,6 @@
 #include "../include/no.hpp"
 
-TipoNo::TipoNo(char valor) {
+TipoNo::TipoNo(std::string valor) {
     this->valor = valor;
     esq = nullptr;
     dir = nullptr;

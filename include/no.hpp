@@ -1,10 +1,13 @@
 #ifndef NO_HPP
 #define NO_HPP
 
+#include <string>
+
 class TipoNo {
     public:
-        TipoNo(char valor);
-        char valor;
+        TipoNo(std::string valor);
+        std::string valor;
+        bool resultado;
         TipoNo *esq;
         TipoNo *dir;
         TipoNo *pai;

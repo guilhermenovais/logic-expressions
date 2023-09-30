@@ -13,7 +13,7 @@ void ArvoreBinaria::defineRaiz(TipoNo* p) {
     raiz = p;
 }
 
-void ArvoreBinaria::insere(char valor) {
+void ArvoreBinaria::insere(std::string valor) {
     insereRecursivo(raiz,valor);
 }
 
@@ -22,12 +22,10 @@ void ArvoreBinaria::caminha(int tipo) {
         preOrdem(raiz);
     } else if(tipo == 1) {
         inOrdem(raiz);
-    } else if(tipo == 2) {
-        posOrdem(raiz);
     }
 }
 
-void ArvoreBinaria::insereRecursivo(TipoNo* &p, char valor) {
+void ArvoreBinaria::insereRecursivo(TipoNo* &p, std::string valor) {
     if(p==NULL){
         p = new TipoNo(valor);
     } else{
@@ -54,11 +52,17 @@ void ArvoreBinaria::inOrdem(TipoNo *p){
     }
 }
 
-void ArvoreBinaria::posOrdem(TipoNo *p){
+void ArvoreBinaria::posOrdem(TipoNo *p, int* valores){
     if(p!=NULL){
-        posOrdem(p->esq);
-        posOrdem(p->dir);
-        std::cout << p->valor;
+        posOrdem(p->esq, valores);
+        posOrdem(p->dir, valores);
+        if(p->valor == "&") p->resultado = p->esq->resultado && p->dir->resultado;
+        else if(p->valor == "|") p->resultado = p->esq->resultado || p->dir->resultado;
+        else if(p->valor == "(") p->resultado = p->dir->resultado;
+        else if(p->valor == ")") p->resultado = p->esq->resultado;
+        else {
+            p->resultado = true;
+        }
     }
 }
 
@@ -73,4 +77,8 @@ void ArvoreBinaria::apagaRecursivo(TipoNo *p){
         apagaRecursivo(p->dir);
         delete p;
     }
+}
+
+void ArvoreBinaria::calculaResultados(int* valores) {
+    posOrdem(raiz, valores);
 }
