@@ -63,12 +63,12 @@ void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao,
                     atual->esq = candidato_a_filho;
                     break;
                 } else {
-                atual->pai = candidato_a_filho->pai;
-                candidato_a_filho->pai->dir = atual;
-                atual->esq = candidato_a_filho;
-                candidato_a_filho->pai = atual;
-                break;
-            }
+                    atual->pai = candidato_a_filho->pai;
+                    candidato_a_filho->pai->dir = atual;
+                    atual->esq = candidato_a_filho;
+                    candidato_a_filho->pai = atual;
+                    break;
+                }
             }
             candidato_a_filho = candidato_a_filho->pai;
         }
@@ -112,9 +112,10 @@ int Expressao::getPrecedencia(std::string valor) {
     if(valor == "(") return 0;
     else if(valor == "|") return 1;
     else if(valor == "&") return 2;
-    else if(valor == ")") return 4;
+    else if(valor == "~") return 3;
+    else if(valor == ")") return 5;
     // Operando
-    else return 3;
+    else return 4;
 }
 
 void Expressao::calculaExpressao() {

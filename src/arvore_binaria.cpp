@@ -58,6 +58,7 @@ void ArvoreBinaria::posOrdem(TipoNo *p, int* valores){
         posOrdem(p->dir, valores);
         if(p->valor == "&") p->resultado = p->esq->resultado && p->dir->resultado;
         else if(p->valor == "|") p->resultado = p->esq->resultado || p->dir->resultado;
+        else if(p->valor == "~") p->resultado = !p->dir->resultado;
         else if(p->valor == "(") p->resultado = p->dir->resultado;
         else if(p->valor == ")") p->resultado = p->esq->resultado;
         else {
