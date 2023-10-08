@@ -20,7 +20,11 @@ CFLAGS = -c -g -I $(INC)
 
 EXE = $(BIN)/expressoes
 
-all:  $(EXE)
+mkdir:
+	[ -d obj ] || mkdir obj
+	[ -d bin ] || mkdir bin
+
+all: mkdir $(EXE)
 
 $(BIN)/expressoes: $(OBJS)
 	$(CC) -o $(EXE) $(OBJS) $(LIBS)
