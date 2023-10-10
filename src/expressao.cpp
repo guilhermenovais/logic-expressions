@@ -1,4 +1,5 @@
 #include "../include/expressao.hpp"
+#include <algorithm>
 #include <cstddef>
 #include <iostream>
 #include <stdexcept>
@@ -13,6 +14,7 @@ Expressao::Expressao(std::string str_expressao, std::string str_valores, std::st
         else if(str_valores[i] == 'e') valores[i] = EXISTENCIAL;
         else if(str_valores[i] == 'a') valores[i] = UNIVERSAL;
     }
+    qtd_valores = str_valores.length();
 }
 
 void Expressao::constroiArvore(std::string expressao) {
@@ -122,15 +124,85 @@ void Expressao::calculaExpressao() {
     if(tipo == "avaliador") {
         avaliaValores();
     } else {
-        avaliaSatisfabilidade();
+        bool satisfaz = avaliaSatisfabilidade(valores);
+        std::cout << satisfaz;
+        if(satisfaz) {
+            std::cout << ' ';
+            for(int i = 0; i < qtd_valores; i++) {
+                if(valores[i] == 0) {
+                    std::cout << '0';
+                } else if(valores[i] == 1) {
+                    std::cout << '1';
+                } else if(valores[i] == DONT_CARE) {
+                    std::cout << 'a';
+                }
+            }
+        }
+        std::cout << '\n';
     }
 }
 
 void Expressao::avaliaValores() {
     arvore_expressao.calculaResultados(valores);
-    std::cout << arvore_expressao.raiz->resultado;
+    std::cout << arvore_expressao.raiz->resultado << '\n';
 }
 
-void Expressao::avaliaSatisfabilidade() {
-    std::cout << tipo;
+bool Expressao::avaliaSatisfabilidade(int* variaveis) {
+    for(int i = 0; i < qtd_valores; i++) {
+        if(variaveis[i] == UNIVERSAL || variaveis[i] == EXISTENCIAL) {
+            int copia_com_0[100];
+            std::copy(variaveis, variaveis + 100, copia_com_0);
+            copia_com_0[i] = 0;
+            bool satisfaz_com_0 = avaliaSatisfabilidade(copia_com_0);
+
+            int copia_com_1[100];
+            std::copy(variaveis, variaveis + 100, copia_com_0);
+            copia_com_0[i] = 1;
+            bool satisfaz_com_1 = avaliaSatisfabilidade(copia_com_0);
+
+            if(variaveis[i] == EXISTENCIAL) {
+                if(satisfaz_com_0 && satisfaz_com_1) {
+                    mergeVariaveis(copia_com_0, copia_com_1, variaveis);
+                    variaveis[i] = DONT_CARE;
+                    return true;
+                } else if(satisfaz_com_0) {
+                    std::copy(copia_com_0, copia_com_0 + 100, variaveis);
+                    variaveis[i] = 0;
+                    return true;
+                } else if(satisfaz_com_1) {
+                    std::copy(copia_com_1, copia_com_1 + 100, variaveis);
+                    variaveis[i] = 1;
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                if(satisfaz_com_0 && satisfaz_com_1) {
+                    mergeVariaveis(copia_com_0, copia_com_1, variaveis);
+                    variaveis[i] = DONT_CARE;
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
+    arvore_expressao.calculaResultados(variaveis);
+    return arvore_expressao.raiz->resultado;
+}
+
+void Expressao::mergeVariaveis(int* variaveis_1, int* variaveis_2, int* variaveis_mergeadas) {
+    for(int i = 0; i < qtd_valores; i++) {
+        if(variaveis_1[i] == 0) {
+            variaveis_mergeadas[i] = variaveis_2[i];
+        } else if(variaveis_2[i] == 0) {
+            variaveis_mergeadas[i] = variaveis_1[i];
+        } else {
+            if(variaveis_1[i] == DONT_CARE || variaveis_2[i] == DONT_CARE) {
+                variaveis_mergeadas[i] = DONT_CARE;
+            } else {
+                variaveis_mergeadas[i] = 1;
+            }
+        }
+    }
 }

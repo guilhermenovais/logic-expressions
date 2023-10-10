@@ -6,11 +6,13 @@
 
 #define UNIVERSAL 2
 #define EXISTENCIAL 3
+#define DONT_CARE 4
 
 class Expressao {
     private:
         ArvoreBinaria arvore_expressao;
         int valores[100];
+        int qtd_valores;
         std::string tipo;
     public:
         Expressao(std::string str_expressao, std::string str_valores, std::string str_tipo);
@@ -19,7 +21,8 @@ class Expressao {
         int getPrecedencia(std::string valor);
         void calculaExpressao();
         void avaliaValores();
-        void avaliaSatisfabilidade();
+        bool avaliaSatisfabilidade(int* variaveis);
+        void mergeVariaveis(int* variaveis_1, int* variaveis_2, int* variaveis_mergeadas);
 };
 
 #endif //EXPRESSAO_HPP
