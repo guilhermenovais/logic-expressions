@@ -156,9 +156,9 @@ bool Expressao::avaliaSatisfabilidade(int* variaveis) {
             bool satisfaz_com_0 = avaliaSatisfabilidade(copia_com_0);
 
             int copia_com_1[100];
-            std::copy(variaveis, variaveis + 100, copia_com_0);
-            copia_com_0[i] = 1;
-            bool satisfaz_com_1 = avaliaSatisfabilidade(copia_com_0);
+            std::copy(variaveis, variaveis + 100, copia_com_1);
+            copia_com_1[i] = 1;
+            bool satisfaz_com_1 = avaliaSatisfabilidade(copia_com_1);
 
             if(variaveis[i] == EXISTENCIAL) {
                 if(satisfaz_com_0 && satisfaz_com_1) {
