@@ -3,6 +3,10 @@
 
 #include "arvore_binaria.hpp"
 #include <string>
+#include <algorithm>
+#include <cstddef>
+#include <iostream>
+#include <stdexcept>
 
 #define UNIVERSAL 2
 #define EXISTENCIAL 3

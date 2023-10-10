@@ -1,8 +1,4 @@
 #include "../include/expressao.hpp"
-#include <algorithm>
-#include <cstddef>
-#include <iostream>
-#include <stdexcept>
 
 Expressao::Expressao(std::string str_expressao, std::string str_valores, std::string str_tipo) {
     constroiArvore(str_expressao);
