@@ -20,7 +20,7 @@ OBJS = $(OBJ)/arvore_binaria.o $(OBJ)/no.o $(OBJ)/expressao.o $(OBJ)/main.o
 HDRS = $(INC)/arvore_binaria.hpp $(INC)/no.hpp $(INC)/expressao.hpp
 CFLAGS = -c -g -I $(INC)
 
-EXE = $(BIN)/expressoes
+EXE = $(BIN)/tp1.out
 
 mkdir:
 	[ -d obj ] || mkdir obj
@@ -28,7 +28,7 @@ mkdir:
 
 all: mkdir $(EXE)
 
-$(BIN)/expressoes: $(OBJS)
+$(EXE): $(OBJS)
 	$(CC) -o $(EXE) $(OBJS) $(LIBS)
 
 $(OBJ)/arvore_binaria.o: $(HDRS) $(SRC)/arvore_binaria.cpp
