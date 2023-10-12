@@ -127,7 +127,8 @@ int Expressao::getPrecedencia(std::string valor) {
 
 void Expressao::calculaExpressao() {
     if(tipo == "avaliador") {
-        avaliaValores();
+        bool resultado = avaliaValores();
+        std::cout << resultado << '\n';
     } else {
         bool satisfaz = avaliaSatisfabilidade(valores);
         std::cout << satisfaz;
@@ -147,9 +148,9 @@ void Expressao::calculaExpressao() {
     }
 }
 
-void Expressao::avaliaValores() {
+bool Expressao::avaliaValores() {
     arvore_expressao.calculaResultados(valores);
-    std::cout << arvore_expressao.raiz->resultado << '\n';
+    return arvore_expressao.raiz->resultado;
 }
 
 bool Expressao::avaliaSatisfabilidade(int* variaveis) {

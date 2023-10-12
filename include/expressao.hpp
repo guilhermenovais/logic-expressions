@@ -24,7 +24,7 @@ class Expressao {
         void leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao, int indice);
         int getPrecedencia(std::string valor);
         void calculaExpressao();
-        void avaliaValores();
+        bool avaliaValores();
         bool avaliaSatisfabilidade(int* variaveis);
         void mergeVariaveis(int* variaveis_1, int* variaveis_2, int* variaveis_mergeadas);
 };
