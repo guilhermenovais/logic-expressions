@@ -4,6 +4,7 @@ Expressao::Expressao(std::string str_expressao, std::string str_valores, std::st
     constroiArvore(str_expressao);
     if(str_tipo == "-a") tipo = "avaliador";
     else tipo =  "satisfabilidade";
+    // Grava os valores dos operandos no array de valores
     for(int i = 0; i < str_valores.length(); i++) {
         if(str_valores[i] == '0') valores[i] = 0;
         else if(str_valores[i] == '1') valores[i] = 1;
@@ -32,6 +33,7 @@ void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao,
     }
 
     std::string elemento = "";
+    // Concatena o elemento
     while(1) {
         elemento.push_back(expressao[indice]);
         if(indice + 1 < expressao.length()) {
@@ -48,9 +50,11 @@ void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao,
     TipoNo* atual = new TipoNo(elemento);
 
     if(*raiz == nullptr) *raiz = atual;
+    // Caso seja abertura de parêntesis, posiciona à direita do anterior
     else if(atual->valor == "(") {
         atual->pai = *anterior;
         (*anterior)->dir = atual;
+    // Caso seja fechamento de parêntesis, posiciona acima da abertura de parêntesis
     } else if(atual->valor == ")") {
         TipoNo* candidato_a_filho = *anterior;
         while(1) {
@@ -146,11 +150,13 @@ void Expressao::avaliaValores() {
 bool Expressao::avaliaSatisfabilidade(int* variaveis) {
     for(int i = 0; i < qtd_valores; i++) {
         if(variaveis[i] == UNIVERSAL || variaveis[i] == EXISTENCIAL) {
+            // Calcula o valor da expressão com a variável igual à 0
             int copia_com_0[100];
             std::copy(variaveis, variaveis + 100, copia_com_0);
             copia_com_0[i] = 0;
             bool satisfaz_com_0 = avaliaSatisfabilidade(copia_com_0);
 
+            // Calcula o valor da expressão com a variável igual à 1
             int copia_com_1[100];
             std::copy(variaveis, variaveis + 100, copia_com_1);
             copia_com_1[i] = 1;
@@ -188,6 +194,7 @@ bool Expressao::avaliaSatisfabilidade(int* variaveis) {
 }
 
 void Expressao::mergeVariaveis(int* variaveis_1, int* variaveis_2, int* variaveis_mergeadas) {
+    // Faz a mesclagem de dois arrays de variáveis
     for(int i = 0; i < qtd_valores; i++) {
         if(variaveis_1[i] == 0) {
             variaveis_mergeadas[i] = variaveis_2[i];
