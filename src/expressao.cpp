@@ -78,11 +78,16 @@ void Expressao::leValor(TipoNo** raiz, TipoNo** anterior, std::string expressao,
         TipoNo* candidato_a_pai = *anterior;
         while(1) {
             // Caso a precedência do pai seja menor
-            if(getPrecedencia(atual->valor) >= getPrecedencia(candidato_a_pai->valor)) {
+            if(getPrecedencia(atual->valor) > getPrecedencia(candidato_a_pai->valor)) {
                 atual->pai = candidato_a_pai;
                 candidato_a_pai->dir = atual;
                 break;
-            // Caso a precedência do pai seja maior
+            // Caso o pai e o atual sejam NOT
+            } else if(getPrecedencia(atual->valor) == getPrecedencia(candidato_a_pai->valor) && atual->valor == "~") {
+                atual->dir = candidato_a_pai->dir;
+                atual->pai = candidato_a_pai;
+                candidato_a_pai->dir = atual;
+                break;
             } else {
                 // Caso o pai seja raiz
                 if(candidato_a_pai == *raiz) {
