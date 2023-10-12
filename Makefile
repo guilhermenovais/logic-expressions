@@ -6,6 +6,8 @@
 #---------------------------------------------------------------------
 # Opções	: make all - compila tudo e executa o exemplo
 #			: make clean - remove objetos e executável
+#			: make test - compila tudo e executa o teste com o
+#			  valgrind e o gdb
 #---------------------------------------------------------------------
 
 CC = g++
