@@ -14,8 +14,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/arvore_binaria.o $(OBJ)/no.o $(OBJ)/pilha.o $(OBJ)/expressao.o $(OBJ)/main.o
-HDRS = $(INC)/arvore_binaria.hpp $(INC)/no.hpp $(INC)/pilha.hpp $(INC)/expressao.hpp
+OBJS = $(OBJ)/arvore_binaria.o $(OBJ)/no.o $(OBJ)/expressao.o $(OBJ)/main.o
+HDRS = $(INC)/arvore_binaria.hpp $(INC)/no.hpp $(INC)/expressao.hpp
 CFLAGS = -c -g -I $(INC)
 
 EXE = $(BIN)/expressoes
@@ -34,9 +34,6 @@ $(OBJ)/arvore_binaria.o: $(HDRS) $(SRC)/arvore_binaria.cpp
 
 $(OBJ)/no.o: $(HDRS) $(SRC)/no.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/no.o $(SRC)/no.cpp 
-
-$(OBJ)/pilha.o: $(HDRS) $(SRC)/pilha.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/pilha.o $(SRC)/pilha.cpp 
 
 $(OBJ)/expressao.o: $(HDRS) $(SRC)/expressao.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/expressao.o $(SRC)/expressao.cpp 
