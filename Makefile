@@ -17,7 +17,7 @@ OBJ = obj
 INC = include
 BIN = bin
 OBJS = $(OBJ)/arvore_binaria.o $(OBJ)/no.o $(OBJ)/expressao.o $(OBJ)/main.o
-HDRS = $(INC)/arvore_binaria.hpp $(INC)/no.hpp $(INC)/expressao.hpp
+HDRS = $(INC)/arvore_binaria.hpp $(INC)/no.hpp $(INC)/expressao.hpp $(INC)/excecoes.hpp
 CFLAGS = -c -g -I $(INC)
 
 EXE = $(BIN)/tp1.out
