@@ -16,8 +16,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/arvore_binaria.o $(OBJ)/no.o $(OBJ)/expressao.o $(OBJ)/main.o
-HDRS = $(INC)/arvore_binaria.hpp $(INC)/no.hpp $(INC)/expressao.hpp $(INC)/excecoes.hpp
+OBJS = $(OBJ)/arvore_binaria.o $(OBJ)/no.o $(OBJ)/expressao.o $(OBJ)/main.o $(OBJ)/memlog.o
+HDRS = $(INC)/arvore_binaria.hpp $(INC)/no.hpp $(INC)/expressao.hpp $(INC)/excecoes.hpp $(INC)/memlog.hpp $(INC)/msgassert.hpp
 CFLAGS = -c -g -I $(INC)
 
 EXE = $(BIN)/tp1.out
@@ -42,6 +42,9 @@ $(OBJ)/expressao.o: $(HDRS) $(SRC)/expressao.cpp
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp 
+
+$(OBJ)/memlog.o: $(HDRS) $(SRC)/memlog.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/memlog.o $(SRC)/memlog.cpp
 	
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out
